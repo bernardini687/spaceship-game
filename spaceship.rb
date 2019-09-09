@@ -1,8 +1,8 @@
-class Player
+class Spaceship
   attr_reader :score
 
   def initialize
-    @image = Gosu::Image.new 'media/starfighter.bmp'
+    @image = Gosu::Image.new 'media/spaceship.bmp'
     @beep = Gosu::Sample.new 'media/beep.wav'
     @x = @y = @vel_x = @vel_y = @angle = 0.0
     @score = 0
@@ -36,7 +36,7 @@ class Player
   end
 
   def draw
-    @image.draw_rot @x, @y, ZOrder::PLAYER, @angle
+    @image.draw_rot @x, @y, ZOrder::SHIP, @angle
   end
 
   def collect_stars(stars)

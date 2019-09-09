@@ -3,7 +3,7 @@ require 'gosu'
 require_relative 'z_order'
 
 require_relative 'star'
-require_relative 'player'
+require_relative 'spaceship'
 
 class Game < Gosu::Window
   def initialize
@@ -15,8 +15,8 @@ class Game < Gosu::Window
     @star_motion = Gosu::Image.load_tiles 'media/star.png', 25, 25
     @stars = []
 
-    @player = Player.new
-    @player.warp 320, 240
+    @ship = Spaceship.new
+    @ship.warp 320, 240
 
     @font = Gosu::Font.new 20
   end
@@ -24,18 +24,18 @@ class Game < Gosu::Window
   def update
     rand(100) < 4 && @stars.size < 12 && @stars.push(Star.new(@star_motion))
 
-    Gosu.button_down?(Gosu::KB_LEFT) && @player.turn_left
-    Gosu.button_down?(Gosu::KB_RIGHT) && @player.turn_right
-    Gosu.button_down?(Gosu::KB_UP) && @player.accelerate
-    @player.move
-    @player.collect_stars(@stars)
+    Gosu.button_down?(Gosu::KB_LEFT) && @ship.turn_left
+    Gosu.button_down?(Gosu::KB_RIGHT) && @ship.turn_right
+    Gosu.button_down?(Gosu::KB_UP) && @ship.accelerate
+    @ship.move
+    @ship.collect_stars(@stars)
   end
 
   def draw
     @bg.draw 0, 0, ZOrder::BG
     @stars.each(&:draw)
-    @player.draw
-    @font.draw_text @player.score.to_s, 10, 10, ZOrder::UI
+    @ship.draw
+    @font.draw_text @ship.score.to_s, 10, 10, ZOrder::UI
   end
 
   def button_down(id)

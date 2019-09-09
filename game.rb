@@ -5,10 +5,10 @@ require_relative 'z_order'
 require_relative 'star'
 require_relative 'player'
 
-class Tutorial < Gosu::Window
+class Game < Gosu::Window
   def initialize
     super 640, 480
-    self.caption = 'tutorial game'
+    self.caption = 'game'
 
     @bg = Gosu::Image.new 'media/space.png', tileable: true
 
@@ -20,12 +20,13 @@ class Tutorial < Gosu::Window
   end
 
   def update
-    rand(100) < 4 && @stars.size < 4 && @stars.push(Star.new(@star_motion))
+    rand(100) < 4 && @stars.size < 12 && @stars.push(Star.new(@star_motion))
 
     Gosu.button_down?(Gosu::KB_LEFT) && @player.turn_left
     Gosu.button_down?(Gosu::KB_RIGHT) && @player.turn_right
     Gosu.button_down?(Gosu::KB_UP) && @player.accelerate
     @player.move
+    @player.collect_stars(@stars)
   end
 
   def draw
@@ -42,4 +43,4 @@ class Tutorial < Gosu::Window
   end
 end
 
-Tutorial.new.show
+Game.new.show

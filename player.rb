@@ -1,4 +1,6 @@
 class Player
+  attr_reader :score
+
   def initialize
     @image = Gosu::Image.new 'media/starfighter.bmp'
     @x = @y = @vel_x = @vel_y = @angle = 0.0
@@ -34,5 +36,9 @@ class Player
 
   def draw
     @image.draw_rot @x, @y, ZOrder::PLAYER, @angle
+  end
+
+  def collect_stars(stars)
+    stars.reject! { |star| Gosu.distance @x, @y, star.x, star.y < 35 }
   end
 end

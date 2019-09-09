@@ -17,6 +17,8 @@ class Game < Gosu::Window
 
     @player = Player.new
     @player.warp 320, 240
+
+    @font = Gosu::Font.new 20
   end
 
   def update
@@ -33,6 +35,7 @@ class Game < Gosu::Window
     @bg.draw 0, 0, ZOrder::BG
     @stars.each(&:draw)
     @player.draw
+    @font.draw @player.score.to_s, 10, 10, ZOrder::UI, 1.0, 1.0
   end
 
   def button_down(id)

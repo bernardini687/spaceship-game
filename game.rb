@@ -35,7 +35,7 @@ class Game < Gosu::Window
     @bg.draw 0, 0, ZOrder::BG
     @stars.each(&:draw)
     @player.draw
-    @font.draw @player.score.to_s, 10, 10, ZOrder::UI, 1.0, 1.0
+    @font.draw_text @player.score.to_s, 10, 10, ZOrder::UI
   end
 
   def button_down(id)
